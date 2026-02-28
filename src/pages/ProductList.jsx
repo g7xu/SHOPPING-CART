@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductItem from '../components/ProductItem.jsx';
 import CartSummary from '../components/CartSummary.jsx';
+import instance from '../interceptors/auth.interceptor.js';
 import './ProductList.css';
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // TODO: Fetch the product list from an API
+  useEffect(() => {
+    instance.get('/products')
+      .then(res => setProducts(res.data.products ?? []))
+      .catch(err => setError(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+
   if (loading) {
     return <p>Loading products...</p>;
   }
