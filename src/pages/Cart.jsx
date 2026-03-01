@@ -1,7 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { increaseItemQuantity, decreaseItemQuantity, removeItemFromCart, clearCart } from '../store/cartSlice/cart.slice';
+import { removeItemFromCart, clearCart } from '../store/cartSlice/cart.slice';
 import './Cart.css';
 
 const Cart = () => {
@@ -14,10 +13,12 @@ const Cart = () => {
     dispatch(clearCart());
   };
 
-  const handleRemove = (id ) => {
-    dispatch(removeItemFromCart({
-      id : id
-    }))
+  const handleRemove = (id) => {
+    dispatch(
+      removeItemFromCart({
+        id: id,
+      }),
+    );
   };
 
   return (
@@ -49,7 +50,12 @@ const Cart = () => {
                     <strong>Quantity:</strong> {item.quantity}
                   </p>
                 </div>
-                <button onClick = {() => handleRemove(item.id)} className="remove-item-button">Remove</button>
+                <button
+                  onClick={() => handleRemove(item.id)}
+                  className="remove-item-button"
+                >
+                  Remove
+                </button>
               </li>
             ))}
           </ul>
@@ -58,7 +64,12 @@ const Cart = () => {
             <p className="total-items">Total Items: {totalQuantity}</p>
             <p className="total-items">Total Price: {totalPrice.toFixed(2)}</p>
             <div>
-              <button onClick = {() => handleClear()} className="clear-cart-button">Clear Cart</button>
+              <button
+                onClick={() => handleClear()}
+                className="clear-cart-button"
+              >
+                Clear Cart
+              </button>
               <Link to="/ProductList" className="back-to-products-link">
                 Back to Products
               </Link>

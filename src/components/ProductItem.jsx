@@ -1,8 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import './ProductItem.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { increaseItemQuantity, decreaseItemQuantity } from '../store/cartSlice/cart.slice';
+import {
+  increaseItemQuantity,
+  decreaseItemQuantity,
+} from '../store/cartSlice/cart.slice';
 const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
@@ -27,13 +29,13 @@ const ProductItem = ({ product }) => {
         id: product.id,
         title: product.title,
         price: product.price,
-        thumbnail: product.thumbnail ?? ''
-      })
+        thumbnail: product.thumbnail ?? '',
+      }),
     );
   };
 
   const handleDecrease = () => {
-    dispatch(decreaseItemQuantity({ id : product.id }))
+    dispatch(decreaseItemQuantity({ id: product.id }));
   };
 
   return (
@@ -50,14 +52,23 @@ const ProductItem = ({ product }) => {
 
       {isProductInCart(product.id) ? (
         <div className="product-quantity-container">
-          <button onClick = {handleDecrease} className="quantity-button remove-button">-</button>
+          <button
+            onClick={handleDecrease}
+            className="quantity-button remove-button"
+          >
+            -
+          </button>
           <p className="quantity-text">
             Quantity: {getProductQuantity(product.id)}
           </p>
-          <button onClick = {handleAdd} className="quantity-button add-button">+</button>
+          <button onClick={handleAdd} className="quantity-button add-button">
+            +
+          </button>
         </div>
       ) : (
-        <button onClick = {handleAdd} className="add-to-cart-button">Add to Cart</button>
+        <button onClick={handleAdd} className="add-to-cart-button">
+          Add to Cart
+        </button>
       )}
     </li>
   );

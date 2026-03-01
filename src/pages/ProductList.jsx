@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductItem from '../components/ProductItem.jsx';
 import CartSummary from '../components/CartSummary.jsx';
 import instance from '../interceptors/auth.interceptor.js';
@@ -9,12 +9,12 @@ const ProductList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    instance.get('/products')
-      .then(res => setProducts(res.data.products ?? []))
-      .catch(err => setError(err))
+    instance
+      .get('/products')
+      .then((res) => setProducts(res.data.products ?? []))
+      .catch((err) => setError(err))
       .finally(() => setLoading(false));
   }, []);
-
 
   if (loading) {
     return <p>Loading products...</p>;

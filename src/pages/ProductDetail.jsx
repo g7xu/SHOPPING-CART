@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ProductItem from '../components/ProductItem';
 import instance from '../interceptors/auth.interceptor';
@@ -15,9 +15,10 @@ const ProductDetail = () => {
       setLoading(false);
       return;
     }
-    instance.get(`/products/${id}`)
-      .then(res => setProduct(res.data))
-      .catch(err => setError(err?.message ?? 'Failed to load product'))
+    instance
+      .get(`/products/${id}`)
+      .then((res) => setProduct(res.data))
+      .catch((err) => setError(err?.message ?? 'Failed to load product'))
       .finally(() => setLoading(false));
   }, [id]);
 
