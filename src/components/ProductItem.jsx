@@ -1,17 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './ProductItem.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { increaseItemQuantity, decreaseItemQuantity } from '../store/cartSlice/cart.slice';
 const ProductItem = ({ product }) => {
-  // TODO: Implement the isProductInCart function.
-  // TODO: Implement the getProductQuantity function.
-  // TODO: Handle the onClick action for the add, remove, and "Add to Cart" buttons.
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
 
   const isProductInCart = (productId) => {
-    return false;
+    return cartItems.some((item) => item.id === productId);
   };
 
   const getProductQuantity = (productId) => {
-    return 0;
+    const item = cartItems.find((item) => item.id === productId);
+
+    if (item) {
+      return item.quantity;
+    } else {
+      return 0;
+    }
+  };
+
+  const handleAdd = () => {
+    dispatch(
+      increaseItemQuantity({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        thumbnail: product.thumbnail ?? ''
+      })
+    );
+  };
+
+  const handleDecrease = () => {
+    dispatch(decreaseItemQuantity({ id : product.id }))
   };
 
   return (
@@ -28,14 +50,14 @@ const ProductItem = ({ product }) => {
 
       {isProductInCart(product.id) ? (
         <div className="product-quantity-container">
-          <button className="quantity-button remove-button">-</button>
+          <button onClick = {handleDecrease} className="quantity-button remove-button">-</button>
           <p className="quantity-text">
             Quantity: {getProductQuantity(product.id)}
           </p>
-          <button className="quantity-button add-button">+</button>
+          <button onClick = {handleAdd} className="quantity-button add-button">+</button>
         </div>
       ) : (
-        <button className="add-to-cart-button">Add to Cart</button>
+        <button onClick = {handleAdd} className="add-to-cart-button">Add to Cart</button>
       )}
     </li>
   );
