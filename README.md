@@ -1,11 +1,10 @@
 # Shopping Cart App - Building the wheel
 
-This repository demonstrates my learning journey with React-Redux and state management. It's a shopping cart web application powered by React, Redux Toolkit, and React Router that performs basic e-commerce operations.
+This repository demonstrates my learning journey with React-Redux and state management. It's a shopping cart web application powered by React, **Redux Toolkit**, and React Router that performs basic e-commerce operations.
 
 On a high level, I would treat Redux as a dictionary to store all the information. Unlike the traditional Context API, it provides a robust way to handle large-scale client-side and server-side data. Moreover, I am amazed by its mechanism for handling store updates. With a single line of code using `useSelector` and `useDispatch`, I don't need to handle data refresh. Updates to data automatically trigger re-renders, which simplifies the old subscribe functions.
 
 Users can browse items from the Product List, visit individual product details, and add or remove items from the cart. All data stays synced across pages through the Redux store.
-
 
 ## Thinking Process
 
@@ -33,17 +32,20 @@ This project helped me understand how Redux simplifies state management across m
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/g7xu/SHOPPING-CART.git
 cd SHOPPING-CART
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -63,6 +65,7 @@ The built files will be in the `dist` directory.
 ```bash
 npm run preview
 ```
+
 ## File Structure
 
 ```
