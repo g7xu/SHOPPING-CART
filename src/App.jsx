@@ -13,6 +13,7 @@ const App = () => {
       <Route path='/cart' element = {<Cart />}></Route>
       <Route path='/ProductDetail' element = {<ProductDetail/>}></Route>
       <Route path='/ProductList' element = {<ProductList/>}></Route>
+      <Route path='/product/:id' element = {<ProductDetail/>}></Route>
       <Route path='*' element = {<NotFound/>}></Route>
     </Routes>
   </BrowserRouter>

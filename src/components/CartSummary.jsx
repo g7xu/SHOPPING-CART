@@ -7,7 +7,6 @@ const CartSummary = () => {
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
 
-
   return (
     <div className="cart-summary">
       <h3 className="cart-summary-text">Total Items: {totalQuantity}</h3>

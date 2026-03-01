@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ProductItem from '../components/ProductItem';
+import instance from '../interceptors/auth.interceptor';
 import './ProductDetail.css';
 
 const ProductDetail = () => {
@@ -9,7 +10,17 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // TODO: Fetch product details from an API using the product id from useParams
+  useEffect(() => {
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+    instance.get(`/products/${id}`)
+      .then(res => setProduct(res.data))
+      .catch(err => setError(err?.message ?? 'Failed to load product'))
+      .finally(() => setLoading(false));
+  }, [id]);
+
   if (loading) {
     return <p>Loading product details...</p>;
   }
@@ -18,9 +29,13 @@ const ProductDetail = () => {
     return <p style={{ color: 'red' }}>{error}</p>;
   }
 
+  if (!product) {
+    return <p>Product not found.</p>;
+  }
+
   return (
     <div>
-      <Link to="/" className="back-link">
+      <Link to="/ProductList" className="back-link">
         ← Back to Products
       </Link>
       <div className="product-detail-container">

@@ -1,20 +1,34 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { increaseItemQuantity, decreaseItemQuantity, removeItemFromCart, clearCart } from '../store/cartSlice/cart.slice';
 import './Cart.css';
 
 const Cart = () => {
-  // TODO: Use Redux to access and manage the cart state
-  // TODO: Implement the onClick action for the "Remove" button
-  // TODO: Implement the onClick action for the "Clear Cart" button
-  const items = [];
+  const dispatch = useDispatch();
+  const items = useSelector((state) => state.cart.items);
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const totalPrice = useSelector((state) => state.cart.totalPrice);
+
+  const handleClear = () => {
+    dispatch(clearCart());
+  };
+
+  const handleRemove = (id ) => {
+    dispatch(removeItemFromCart({
+      id : id
+    }))
+  };
+
   return (
     <div className="cart-container">
       <h2 className="cart-title">Shopping Cart</h2>
       {items.length === 0 ? (
         <div className="empty-cart-message">
           <p>Your cart is empty.</p>
-          {/* <Link to="/" className="go-shopping-link">
+          <Link to="/ProductList" className="go-shopping-link">
             Go Shopping
-          </Link> */}
+          </Link>
         </div>
       ) : (
         <>
@@ -35,19 +49,19 @@ const Cart = () => {
                     <strong>Quantity:</strong> {item.quantity}
                   </p>
                 </div>
-                <button className="remove-item-button">Remove</button>
+                <button onClick = {() => handleRemove(item.id)} className="remove-item-button">Remove</button>
               </li>
             ))}
           </ul>
 
           <div className="cart-summary">
-            <p className="total-items">Total Items: {0}</p>
-            <p className="total-items">Total Price: {0}</p>
+            <p className="total-items">Total Items: {totalQuantity}</p>
+            <p className="total-items">Total Price: {totalPrice.toFixed(2)}</p>
             <div>
-              <button className="clear-cart-button">Clear Cart</button>
-              {/* <Link to="/" className="back-to-products-link">
+              <button onClick = {() => handleClear()} className="clear-cart-button">Clear Cart</button>
+              <Link to="/ProductList" className="back-to-products-link">
                 Back to Products
-              </Link> */}
+              </Link>
             </div>
           </div>
         </>
