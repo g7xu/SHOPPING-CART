@@ -96,15 +96,12 @@ src/
 ## Setup Instructions
 
 1. **Fork this project**:
-
    - Click the **[Fork this project on StackBlitz](https://stackblitz.com/edit/vitejs-vite-27yatkye)** link to create a copy of the project in your StackBlitz account.
 
 2. **Start Editing**:
-
    - Once you’ve forked the project, you can start editing directly in the StackBlitz editor or your local development environment.
 
 3. **Live Preview**:
-
    - StackBlitz will automatically start a live preview for you, allowing you to see the app running in the browser.
 
 4. **Make Your Changes**:
